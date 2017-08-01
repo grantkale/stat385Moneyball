@@ -13,6 +13,7 @@ weather_stored = weather_stored[grep("(PM)",weather_stored[,2]),]
 weather_clean[i,] = weather_stored[1,]
 weather_clean[i,5] = substring(weather_clean[i,5], 1 ,1)
 }
+#Clean columns and add column names
 weather_clean = weather_clean[,-c(1,2)]
 colnames(weather_clean) = c("Temp", "Humidity", "Wind Dir")
 weather_clean$`Wind Dir` = gsub("C", NA, weather_clean$`Wind Dir`)
