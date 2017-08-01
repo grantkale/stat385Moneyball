@@ -22,7 +22,7 @@ shinyUI(fluidPage(
                   choices = c("Kris Bryant", "Anthony Rizzo", "Ben Zobrist", "Addison Russell", "Jason Heyward")),
       selectInput("active_weather", #Choose a weather attribute to analyze
                    "Weather Attributes:", # Label
-                   choices = c("Wind Speed", 'Wind Direction', 'Humidity', 'Temperature', 'Precipitation')), # Default Value
+                   choices = c('Wind Direction', 'Humidity', 'Temperature', 'Precipitation')), # Default Value
       submitButton("Analyze") # Update data
     ),
     
