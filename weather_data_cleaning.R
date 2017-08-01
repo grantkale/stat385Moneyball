@@ -28,9 +28,9 @@ heyward_final = cbind(heyward_player_frame, weather_clean)
 
 
 #Save Frames
-save(bryant_final, file = "bryant_final.rda")
-save(heyward_final, file = "heyward_final.rda")
-save(rizzo_final, file = "rizzot_final.rda")
-save(russell_final, file = "russell_final.rda")
-save(zobrist_final, file = "zobrist_final.rda")
+save(bryant_final, file = "data_visual/bryant_final.rda")
+save(heyward_final, file = "data_visual/heyward_final.rda")
+save(rizzo_final, file = "data_visual/rizzo_final.rda")
+save(russell_final, file = "data_visual/russell_final.rda")
+save(zobrist_final, file = "data_visual/zobrist_final.rda")
 

@@ -12,7 +12,6 @@ load("bryant_final.rda")
 load("rizzo_final.rda")
 load("russell_final.rda")
 load("heyward_final.rda")
-#We need to load in our data.frames, ask how we can do this.
 
 shinyServer(function(input, output) {
   
@@ -36,7 +35,7 @@ shinyServer(function(input, output) {
   weatherInput = reactive({ #Reactive
     switch(input$active_weather, #Load weather set
            'Temperature' = playerInput()$Temp,
-           'Wind Direction' = playerInput()$'Wind Dir', 
+           'Wind Direction' = playerInput()[, 'Wind Dir'], 
            'Humidity' = playerInput()$Humidity
            ) 
     })
@@ -48,7 +47,9 @@ shinyServer(function(input, output) {
   })
   
   output$plot1 = renderPlot({
-    
+    print(sapply(playerInput(), class))
+    print(head(playerInput()))
+    print(weatherInput())
     plot(weatherInput(), statInput())
     abline(lm(statInput()~weatherInput(), col="red"))
   })
