@@ -7,32 +7,52 @@
 
 library(shiny)
 library(ggplot2)
+load("zobrist_final.rda")
+load("bryant_final.rda")
+load("rizzo_final.rda")
+load("russell_final.rda")
+load("heyward_final.rda")
 #We need to load in our data.frames, ask how we can do this.
 
 shinyServer(function(input, output) {
   
   playerInput = reactive({ # Reactive
     switch(input$active_player, # Load player set
-           "Kris Bryant" = bryant_player_frame,
-           "Anthony Rizzo" = rizzo_player_frame,
-           "Ben Zobrist" = zobrist_player_frame,
-           "Addison Russell" = russell_player_frame,
-           "Jason Heyward" = heyward_player_frame)
+           "Kris Bryant" = bryant_final,
+           "Anthony Rizzo" = rizzo_final,
+           "Ben Zobrist" = zobrist_final,
+           "Addison Russell" = russell_final,
+           "Jason Heyward" = heyward_final)
+  })
+  
+  statInput = reactive({ # Reactive
+    switch(input$active_stat, # Load player set
+           "Batting Average" = playerInput()$AVG,
+           "Slugging Percentage" = playerInput()$SLG,
+           "Home Runs" = playerInput()$HR,
+           "Strikeouts" = playerInput()$SO)
   })
   
   weatherInput = reactive({ #Reactive
     switch(input$active_weather, #Load weather set
-           'Wind Direction' = win_dir, 
-           'Humidity' = humidity,
-           'Temperature' = temp) 
+           'Temperature' = playerInput()$Temp,
+           'Wind Direction' = playerInput()$'Wind Dir', 
+           'Humidity' = playerInput()$Humidity
+           ) 
     })
   
 
-  output$distPlot <- renderPlot({
-
-    g = ggplot(long_births) +
-      geom_line(aes(x = input$active_player, y = input$active_weather, color = hospital))
+  output$plot_summary = renderPrint({
+    summary(lm(formula = (statInput() ~ weatherInput())))
+    
+  })
+  
+  output$plot1 = renderPlot({
+    
+    plot(weatherInput(), statInput())
+    abline(lm(statInput()~weatherInput(), col="red"))
   })
 
 })
 
+View(bryant_final)

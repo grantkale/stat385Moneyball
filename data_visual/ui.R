@@ -8,6 +8,11 @@
 library(shiny)
 
 shinyUI(fluidPage(
+  
+  basicPage(
+    plotOutput("plot1", click = "plot_click"),
+    verbatimTextOutput("plot_summary")
+  ),
 
   # Application title
   titlePanel("Money Ball: MLB Players vs Weather"),
@@ -19,17 +24,31 @@ shinyUI(fluidPage(
       # Dropdown
       selectInput("active_player", #Choose a player to analyze
                   "Choose a player:", # Label
-                  choices = c("Kris Bryant", "Anthony Rizzo", "Ben Zobrist", "Addison Russell", "Jason Heyward")),
+                  choices = c("Kris Bryant", 
+                              "Anthony Rizzo", 
+                              "Ben Zobrist", 
+                              "Addison Russell", 
+                              "Jason Heyward")),
+      
+      selectInput("active_stat", #Choose a stat to analyze
+                  "Choose a statistic:", # Label
+                  choices = c("Batting Average", 
+                              "Slugging Percentage", 
+                              "Home Runs", 
+                              "Strikeouts")),
+      
       selectInput("active_weather", #Choose a weather attribute to analyze
                    "Weather Attributes:", # Label
-                   choices = c('Wind Direction', 'Humidity', 'Temperature', 'Precipitation')), # Default Value
+                   choices = c('Humidity',
+                               'Wind Direction', 
+                               'Temperature')), # Default Value
+      
       submitButton("Analyze") # Update data
     ),
     
 
     # Show a plot of the generated distribution
     mainPanel(
-      
       plotOutput("distPlot")
     )
   )
