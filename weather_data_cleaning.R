@@ -11,9 +11,12 @@ weather_data = getDetailedWeather(bryant_player_frame[i,14], bryant_player_frame
 weather_stored = weather_data[grep(paste0("(",x,":5)"), weather_data[,2]),]  
 weather_stored = weather_stored[grep("(PM)",weather_stored[,2]),]
 weather_clean[i,] = weather_stored[1,]
+weather_clean[i,5] = substring(weather_clean[i,5], 1 ,1)
 }
 weather_clean = weather_clean[,-c(1,2)]
 colnames(weather_clean) = c("Temp", "Humidity", "Wind Dir")
+weather_clean$`Wind Dir` = gsub("C", NA, weather_clean$`Wind Dir`)
+weather_clean$`Wind Dir` = gsub("V", NA, weather_clean$`Wind Dir`)
 
 bryant_final = cbind(bryant_player_frame, weather_clean)
 rizzo_final = cbind(rizzo_player_frame, weather_clean)
