@@ -6,6 +6,7 @@
 #
 
 library(shiny)
+library(ggplot2)
 #We need to load in our data.frames, ask how we can do this.
 
 shinyServer(function(input, output) {
@@ -18,6 +19,14 @@ shinyServer(function(input, output) {
            "Addison Russell" = russell_player_frame,
            "Jason Heyward" = heyward_player_frame)
   })
+  
+  weatherInput = reactive({ #Reactive
+    switch(input$active_weather, #Load weather set
+           'Wind Direction' = win_dir, 
+           'Humidity' = humidity,
+           'Temperature' = temp, 
+           'Precipitation' = precip)
+    })
   
 
   output$distPlot <- renderPlot({
