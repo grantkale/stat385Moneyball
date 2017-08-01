@@ -53,11 +53,11 @@ clean_data_frame = function(x){
                       "MIA" = "KMIA",
                       "LAD" = "KSLI",
                       "SD" = "KSAN",
-                      "HOU" = "HOU",
+                      "HOU" = "KHOU",
                       "COL" = "KDEN",
                       "OAK" = "KOAK",
                       "LAA" = "KSNA",
-                      "IDK")
+                      "NYM" = "KLGA")
   }
   x$OPPID = oppid
   times = c('9:05',
@@ -113,7 +113,7 @@ clean_data_frame = function(x){
             '4:05',
             '7:05',
             '7:05',
-            'T1:20',
+            '1:20',
             '1:20',
             '1:20',
             '1:20',
