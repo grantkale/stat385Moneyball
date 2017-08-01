@@ -24,20 +24,15 @@ shinyServer(function(input, output) {
     switch(input$active_weather, #Load weather set
            'Wind Direction' = win_dir, 
            'Humidity' = humidity,
-           'Temperature' = temp, 
-           'Precipitation' = precip)
+           'Temperature' = temp) 
     })
   
 
   output$distPlot <- renderPlot({
 
-    # generate bins based on input$bins from ui.R
-    x    <- faithful[, 2]
-    bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
-    # draw the histogram with the specified number of bins
-    hist(x, breaks = bins, col = 'darkgray', border = 'white')
-
+    g = ggplot(long_births) +
+      geom_line(aes(x = input$active_player, y = input$active_weather, color = hospital))
   })
 
 })
+
