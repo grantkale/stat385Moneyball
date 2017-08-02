@@ -50,7 +50,7 @@ shinyServer(function(input, output) {
     print(sapply(playerInput(), class))
     print(head(playerInput()))
     print(weatherInput())
-    plot(weatherInput(), statInput())
+    plot(weatherInput(), statInput(), main = input$active_player, ylab=input$active_stat, xlab=input$active_weather)
     abline(lm(statInput()~weatherInput(), col="red"))
   })
 
